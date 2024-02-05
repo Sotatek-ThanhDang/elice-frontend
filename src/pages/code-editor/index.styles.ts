@@ -7,15 +7,18 @@ const PageLayout = styled.div`
   height: 100vh;
 
   display: flex;
+
+  font-size: 1.6rem;
+  color: #333;
 `;
 
 const FileExplorer = styled.aside`
   width: 20%;
   height: 100%;
-  background-color: beige;
 
   display: flex;
   flex-direction: column;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
 const ActionHeader = styled.div`
@@ -25,7 +28,6 @@ const ActionHeader = styled.div`
 
 const TreeContainer = styled.div`
   flex: 1;
-  background-color: orangered;
   overflow-y: scroll;
   overflow-x: hidden;
 `;

@@ -1,7 +1,6 @@
-import { lazy,Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { createGlobalStyle } from 'styled-components';
 
- 
 const GlobalStyle = createGlobalStyle`
   *,
   *::after,
@@ -23,7 +22,7 @@ function App() {
   return (
     <Suspense fallback={<h1>Loading....</h1>}>
       <CodeEditer />
-      <GlobalStyle/>
+      <GlobalStyle />
     </Suspense>
   );
 }

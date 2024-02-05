@@ -1,11 +1,13 @@
 import { ChangeEvent } from 'react';
 
 import { Editor } from '@/components/Editor';
+import Tree from '@/components/Tree';
 import { useZipFile } from '@/hooks/useZipFile';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { selectFilesTree, selectRootFileName } from '@/store/files/files.selector';
 import { saveFiles } from '@/store/files/files.slice';
-import { FileData } from '@/types/file';
+import { FileData, FileTreeNode } from '@/types/file';
+import { getFileNameWithoutExtension } from '@/utils/file';
 
 import {
   ActionHeader,
@@ -29,10 +31,15 @@ export default function CodeEditor() {
 
     extractZipToFile(zipFile).then((data: FileData[] | null) => {
       if (data) {
-        console.warn(data);
-        dispatch(saveFiles({ files: data, rootFoldername: zipFile.name }));
+        dispatch(
+          saveFiles({ files: data, rootFoldername: getFileNameWithoutExtension(zipFile.name) })
+        );
       }
     });
+  };
+
+  const handlerClickFile = (_: any, a: any, b: any) => {
+    alert('click' + a);
   };
 
   return (
@@ -42,16 +49,7 @@ export default function CodeEditor() {
           <input type="file" onChange={(e) => onChangeFile(e)}></input>
         </ActionHeader>
         <TreeContainer>
-          {!filesTree.length ? (
-            <>File tree</>
-          ) : (
-            <>
-              <h3>{rootFilename}</h3>
-              {filesTree.map((item) => (
-                <p>{item.name}</p>
-              ))}
-            </>
-          )}
+          <Tree data={filesTree} onFileClick={handlerClickFile} />
         </TreeContainer>
       </FileExplorer>
       <FileView>
