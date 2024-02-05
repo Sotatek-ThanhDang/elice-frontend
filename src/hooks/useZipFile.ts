@@ -12,13 +12,17 @@ export const useZipFile = () => {
         return file.async('string').then((value) => ({
           dataText: value,
           name: file.name,
+          isFolder: file.dir,
           rawData: JSON.stringify(file),
         }));
       });
+
       files = await Promise.all(fileDataPromise);
     } catch (error) {
       console.warn('Read file error');
     }
+
+    files.sort((a, b) => a.name.localeCompare(b.name));
 
     return files;
   };

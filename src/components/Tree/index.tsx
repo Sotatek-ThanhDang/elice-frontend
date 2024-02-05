@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { FileTreeNode } from '@/types/file';
+import { getSortedTreeNode } from '@/utils/file';
 
 import TreeFile from './File';
 import TreeFolder from './Folder';
@@ -24,7 +25,7 @@ const renderTree = ({
       return (
         <TreeFile
           key={item.path}
-          text={item.name}
+          fileName={item.name}
           onClick={() => {
             onFileClick(item, item.name, 'item.key');
           }}
@@ -34,7 +35,12 @@ const renderTree = ({
 
     return (
       <TreeFolder key={item.path} text={item.name}>
-        {item.children?.length ? renderTree({ data: item.children, onFileClick }) : null}
+        {item.children?.length
+          ? renderTree({
+              data: getSortedTreeNode(item.children),
+              onFileClick,
+            })
+          : null}
       </TreeFolder>
     );
   });

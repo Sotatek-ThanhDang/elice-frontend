@@ -14,13 +14,13 @@ const TreeFolder = ({ text, children }: PropsWithChildren<Props>) => {
       <StyledFolder onClick={() => setOpen((pre) => !pre)}>
         {open ? (
           <>
-            <FaChevronDown />
-            <FaFolderOpen />
+            <FaChevronDown fill='#333' />
+            <FaFolderOpen fill='#6C22A6'/>
           </>
         ) : (
           <>
-            <FaChevronRight />
-            <FaFolder />
+            <FaChevronRight fill='#333' />
+            <FaFolder fill='#64CCC5' />
           </>
         )}
 

@@ -1,4 +1,4 @@
-type FileData = { name: string; rawData: string; dataText: string };
+type FileData = { name: string; isFolder: boolean; rawData: string; dataText: string };
 
 type FileTreeNode = {
   name: string;
