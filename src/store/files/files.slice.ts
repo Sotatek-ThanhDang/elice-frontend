@@ -15,10 +15,17 @@ export const filesSlice = createSlice({
       state.files = payload.files;
       state.rootFoldername = payload.rootFoldername;
     },
-    updateFile: (state, { payload }: UpdateFilePayload) => {},
+    updateFileTree: (state, { payload }: UpdateFilePayload) => {
+      const index = state.files.findIndex((item) => item.name === payload.fileName);
+      console.warn(payload);
+
+      if (index !== -1) {
+        state.files[index].dataText = payload.data;
+      }
+    },
   },
 });
 
-export const { saveFiles, updateFile } = filesSlice.actions;
+export const { saveFiles, updateFileTree } = filesSlice.actions;
 
 export default filesSlice.reducer;

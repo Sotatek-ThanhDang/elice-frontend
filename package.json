@@ -42,5 +42,8 @@
   },
   "resolutions": {
     "styled-components": "^5"
+  },
+  "dependencies": {
+    "debounce": "^2.0.0"
   }
 }

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 import { FileTreeNode } from '@/types/file';
-import { getSortedTreeNode } from '@/utils/file';
+import { getSortedTreeNode } from '@/utils/fileTree';
 
 import TreeFile from './File';
 import TreeFolder from './Folder';
 
-type FileClickEvent = (rawData: FileTreeNode, value: string, key: string) => void;
+type FileClickEvent = (rawData: FileTreeNode, name: string, key: string) => void;
 
 type Props = {
   data: FileTreeNode[];
@@ -27,7 +27,7 @@ const renderTree = ({
           key={item.path}
           fileName={item.name}
           onClick={() => {
-            onFileClick(item, item.name, 'item.key');
+            onFileClick(item, item.name, item.path);
           }}
         />
       );

@@ -1,9 +1,5 @@
 import { FileData, FileTreeNode } from '@/types/file';
 
-const getFileNameWithoutExtension = (fileName: string) => {
-  return fileName.replace(/\.[^/.]+$/, '');
-};
-
 const createTreeTructure = (files: FileData[]) => {
   const fileTree: FileTreeNode[] = [];
   const filePaths = new Map<string, FileTreeNode>();
@@ -33,6 +29,7 @@ const createFileAndFolder = (
     path: file.name,
     isFolder: file.isFolder,
     children: [],
+    value: file.dataText,
   };
 
   if (isRootFolder) {
@@ -52,7 +49,7 @@ const getSortedTreeNode = (treeNode: FileTreeNode[]): FileTreeNode[Ç] => {
   const sortCallback = (firstItem: FileTreeNode, secondItem: FileTreeNode) =>
     firstItem.name.localeCompare(secondItem.name);
 
-    treeNode.forEach((item) => {
+  treeNode.forEach((item) => {
     if (item.isFolder) {
       folders.push(item);
     } else {
@@ -66,4 +63,4 @@ const getSortedTreeNode = (treeNode: FileTreeNode[]): FileTreeNode[Ç] => {
   return [...folders, ...files];
 };
 
-export { createTreeTructure, getFileNameWithoutExtension, getSortedTreeNode };
+export { createTreeTructure, getSortedTreeNode };

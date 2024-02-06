@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from '@/store';
-import { createTreeTructure } from '@/utils/file';
+import { createTreeTructure } from '@/utils/fileTree';
 
 const selectFilesState = (state: RootState) => state.files;
 

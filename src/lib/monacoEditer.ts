@@ -23,4 +23,21 @@ self.MonacoEnvironment = {
   },
 };
 
+monaco.editor.defineTheme('dark', {
+  base: 'vs',
+  inherit: true,
+  rules: [],
+  colors: {
+    // 'editor.foreground': '#CBCBCB',
+    // 'editor.background': '#202020',
+    // 'editorCursor.foreground': '#8B0000',
+    // 'editor.lineHighlightBackground': '#0000FF20',
+    // 'editorLineNumber.foreground': '#008800',
+    // 'editor.selectionBackground': '#3A3D41',
+    // 'editor.inactiveSelectionBackground': '#88000015',
+  },
+});
+
+monaco.editor.setTheme('dark');
+
 monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true);

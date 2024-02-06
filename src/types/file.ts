@@ -4,6 +4,7 @@ type FileTreeNode = {
   name: string;
   path: string;
   isFolder: boolean;
+  value: string;
   children?: FileTreeNode[];
 };
 
