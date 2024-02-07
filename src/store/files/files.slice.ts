@@ -17,9 +17,8 @@ export const filesSlice = createSlice({
     },
     updateFileTree: (state, { payload }: UpdateFilePayload) => {
       const index = state.files.findIndex((item) => item.name === payload.fileName);
-      console.warn(payload);
 
-      if (index !== -1) {
+      if (index !== -1 && state.files[index].dataText !== payload.data) {
         state.files[index].dataText = payload.data;
       }
     },

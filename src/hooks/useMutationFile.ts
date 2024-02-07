@@ -10,8 +10,15 @@ import { updateFileTree } from '@/store/files/files.slice';
 export const useMutationFile = () => {
   const dispatch = useAppDispatch();
 
-  const viewFileFromTree = (path: string, value: string) => {
-    dispatch(viewFile({ type: 'tree', path, data: value }));
+  const viewFileFromTree = (path: string, value: string, arrayBuffer: ArrayBuffer) => {
+    dispatch(
+      viewFile({
+        type: 'tree',
+        path,
+        data: value,
+        arrayBuffer,
+      })
+    );
   };
 
   const viewFileFromTab = (filepath: string) => {
@@ -31,5 +38,24 @@ export const useMutationFile = () => {
     dispatch(updateFileTree({ fileName: path, data: value }));
   };
 
-  return { viewFileFromTree, saveCurrentFile, viewFileFromTab, closeFileFromTab, saveDraftFile };
+  const downloadBlobFile = (blob: Blob, fileName: string) => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+
+    a.style.display = 'none';
+    a.href = url;
+    a.download = fileName;
+    
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
+  return {
+    viewFileFromTree,
+    saveCurrentFile,
+    viewFileFromTab,
+    closeFileFromTab,
+    saveDraftFile,
+    downloadBlobFile,
+  };
 };

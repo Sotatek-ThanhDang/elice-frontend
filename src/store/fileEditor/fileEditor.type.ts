@@ -4,6 +4,7 @@ type FileDetail = {
   path: string;
   data: string;
   draftData: string;
+  arrayBuffer: ArrayBuffer;
   lang: string;
 };
 
@@ -18,6 +19,7 @@ type ViewFileFromTree = {
   type: 'tree';
   path: string;
   data: string;
+  arrayBuffer: ArrayBuffer;
 };
 
 type ViewFileFromTab = Pick<ViewFileFromTree, 'path'> & {

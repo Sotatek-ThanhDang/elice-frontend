@@ -4,6 +4,7 @@ import { RootState } from '@/store';
 import { createTreeTructure } from '@/utils/fileTree';
 
 const selectFilesState = (state: RootState) => state.files;
+const selectRawFilesState = createSelector(selectFilesState, (state) => state.files);
 
 const selectRootFileName = createSelector(selectFilesState, (state) => state.rootFoldername);
 
@@ -13,4 +14,4 @@ const selectFilesTree = createSelector(selectFilesState, (state) => {
   return filesTree;
 });
 
-export { selectFilesTree, selectRootFileName };
+export { selectFilesTree, selectRawFilesState, selectRootFileName };

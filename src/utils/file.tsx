@@ -61,9 +61,26 @@ const getFileLangFromName = (fileName: string) => {
   }
 };
 
+const isTextFile = (buffer: ArrayBuffer): boolean => {
+  const view = new Uint8Array(buffer);
+  const length = Math.min(view.length, 1024);
+
+  // Check each byte to see if it is within the ASCII range
+  for (let i = 0; i < length; i++) {
+    const byte = view[i];
+    if ((byte < 32 || byte > 126) && byte !== 10 && byte !== 13) {
+      // If the byte is not in the ASCII range and is not a carriage return or newline return character, then the file is not text.
+      return false;
+    }
+  }
+
+  return true;
+};
+
 export {
   getFileIconFromName,
   getFileLangFromName,
   getFileNameFromPath,
   getFileNameWithoutExtension,
+  isTextFile,
 };

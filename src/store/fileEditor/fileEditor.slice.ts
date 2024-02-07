@@ -31,6 +31,7 @@ export const fileEditorSlice = createSlice({
         data: payload.data,
         draftData: payload.data!,
         lang: getFileLangFromName(payload.path),
+        arrayBuffer: payload.arrayBuffer,
       };
 
       if (!state.files[payload.path]) {
@@ -50,8 +51,9 @@ export const fileEditorSlice = createSlice({
       state.files[state.currentFile].draftData = payload;
     },
     saveCurrentFile: (state, { payload }: SaveFileAction) => {
-      state.files[state.currentFile].data = payload;
-      state.files[state.currentFile].draftData = payload;
+      if (state.files[state.currentFile].data !== payload) {
+        state.files[state.currentFile].data = state.files[state.currentFile].draftData = payload;
+      }
     },
   },
 });

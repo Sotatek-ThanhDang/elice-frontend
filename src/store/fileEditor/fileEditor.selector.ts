@@ -19,6 +19,14 @@ const selectFileTabs = createSelector(selectFiles, (state) => {
   });
 });
 
+const selectActiveRawFile = createSelector([selectFiles, selectCurrentFilePath], (files, id) => {
+  const activeFile = files[id];
+
+  if (!activeFile) return null;
+
+  return activeFile;
+});
+
 const selectActiveFile = createSelector([selectFiles, selectCurrentFilePath], (files, id) => {
   const activeFile = files[id];
 
@@ -31,4 +39,4 @@ const selectActiveFile = createSelector([selectFiles, selectCurrentFilePath], (f
   };
 });
 
-export { selectActiveFile, selectCurrentFilePath, selectFileTabs };
+export { selectActiveFile, selectActiveRawFile, selectCurrentFilePath, selectFileTabs };

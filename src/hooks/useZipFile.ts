@@ -1,20 +1,26 @@
 import JSZip from 'jszip';
 
 import { FileData } from '@/types/file';
+import { isTextFile } from '@/utils/file';
 
 export const useZipFile = () => {
   const getFiles = async (zipData: JSZip): Promise<FileData[]> => {
     let files: FileData[] = [];
 
     try {
-      const fileDataPromise = Object.keys(zipData.files).map((fileName) => {
+      const fileDataPromise = Object.keys(zipData.files).map(async (fileName) => {
         const file = zipData.files[fileName];
-        return file.async('string').then((value) => ({
-          dataText: value,
+
+        const dataText = await file.async('string');
+        const arrayBuffer = await file.async('arraybuffer');
+
+        return {
+          dataText,
+          arrayBuffer,
           name: file.name,
           isFolder: file.dir,
           rawData: JSON.stringify(file),
-        }));
+        };
       });
 
       files = await Promise.all(fileDataPromise);
@@ -38,7 +44,17 @@ export const useZipFile = () => {
     );
   };
 
-  const convertFilesToZip = () => {};
+  const convertFilesToZip = async (files: FileData[]) => {
+    const zip = new JSZip();
+
+    files.forEach((item) => {
+      zip.file(item.name, isTextFile(item.arrayBuffer) ? item.dataText : item.arrayBuffer);
+    });
+
+    const data = await zip.generateAsync({ type: 'blob' });
+
+    return data;
+  };
 
   return {
     extractZipToFile,
