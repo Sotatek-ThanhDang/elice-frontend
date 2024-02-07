@@ -36,6 +36,7 @@ const selectActiveFile = createSelector([selectFiles, selectCurrentFilePath], (f
     value: activeFile.data,
     lang: activeFile.lang,
     path: activeFile.path,
+    arrayBuffer: activeFile.arrayBuffer,
   };
 });
 

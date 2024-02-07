@@ -1,5 +1,5 @@
 import ActionHeaderContainer from './container/ActionHeaderContainer';
-import EditerContainer from './container/EditerContainer';
+import FileViewContainer from './container/FileViewContainer';
 import TabContainer from './container/TabContainer';
 import TreeContainer from './container/TreeContainer';
 import { FileExplorer, FileView, PageLayout } from './index.styles';
@@ -13,7 +13,7 @@ export default function CodeEditor() {
       </FileExplorer>
       <FileView>
         <TabContainer />
-        <EditerContainer />
+        <FileViewContainer />
       </FileView>
     </PageLayout>
   );

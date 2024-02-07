@@ -80,19 +80,21 @@ const TabContainer = styled.div`
   }
 `;
 
-const EditerContainer = styled.div<{ isHidden: boolean }>`
+const StyledFileViewContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
   flex: 1;
-
-  ${({ isHidden }) => isHidden && `opacity: 0`}
 `;
 
 export {
   ActionHeader,
-  EditerContainer,
   FileExplorer,
   FileView,
   PageLayout,
+  StyledFileViewContainer,
   TabContainer,
   TreeContainer,
 };

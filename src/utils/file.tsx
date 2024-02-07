@@ -11,8 +11,36 @@ const getFileNameFromPath = (fileName: string) => {
   return fileName.split('/').at(-1);
 };
 
+const getFileExtentions = (fileName: string) => {
+  return fileName.split('.').at(-1)?.toLocaleLowerCase();
+};
+
+const isVideo = (fileName: string) => {
+  const fileExtentions = getFileExtentions(fileName);
+  switch (fileExtentions) {
+    case 'm4v':
+    case 'avi':
+    case 'mpg':
+    case 'mp4':
+      return true;
+  }
+  return false;
+};
+
+const isImage = (fileName: string) => {
+  const fileExtentions = getFileExtentions(fileName);
+  switch (fileExtentions) {
+    case 'jpg':
+    case 'gif':
+    case 'bmp':
+    case 'png':
+      return true;
+  }
+  return false;
+};
+
 const getFileIconFromName = (fileName: string) => {
-  const fileExtentions = fileName.split('.').at(-1)?.toLocaleLowerCase();
+  const fileExtentions = getFileExtentions(fileName);
 
   switch (fileExtentions) {
     case 'js':
@@ -37,7 +65,7 @@ const getFileIconFromName = (fileName: string) => {
 };
 
 const getFileLangFromName = (fileName: string) => {
-  const fileExtentions = fileName.split('.').at(-1)?.toLocaleLowerCase();
+  const fileExtentions = getFileExtentions(fileName);
 
   switch (fileExtentions) {
     case 'js':
@@ -82,5 +110,7 @@ export {
   getFileLangFromName,
   getFileNameFromPath,
   getFileNameWithoutExtension,
+  isImage,
   isTextFile,
+  isVideo,
 };
