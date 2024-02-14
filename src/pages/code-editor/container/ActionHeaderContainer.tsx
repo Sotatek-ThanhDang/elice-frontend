@@ -8,6 +8,7 @@ import { styled } from 'styled-components';
 import { useMutationFile } from '@/hooks/useMutationFile';
 import { useZipFile } from '@/hooks/useZipFile';
 import { useAppDispatch, useAppSelector } from '@/store';
+import { setTheme } from '@/store/common/common.slice';
 import { selectActiveRawFile } from '@/store/fileEditor/fileEditor.selector';
 import { selectRawFilesState, selectRootFileName } from '@/store/files/files.selector';
 import { saveFiles } from '@/store/files/files.slice';
@@ -61,7 +62,7 @@ export default function ActionHeaderContainer() {
           type="file"
           onChange={(e) => onChangeFile(e)}
           style={{ display: 'none' }}
-          accept='.zip'
+          accept=".zip"
         />
       </div>
       <div>
@@ -82,9 +83,13 @@ export default function ActionHeaderContainer() {
           <MdOutlineSimCardDownload size={'2rem'} />
         </StyledButton>
       </div>
-
       <div>
-        <span title="Select theme">
+        <span
+          title="Select theme"
+          onClick={() => {
+            dispatch(setTheme());
+          }}
+        >
           <CgDarkMode size={'2rem'} />
         </span>
       </div>

@@ -11,7 +11,6 @@ const PageLayout = styled.div`
   display: flex;
 
   font-size: 1.6rem;
-  color: #333;
 `;
 
 const FileExplorer = styled.aside`
@@ -21,7 +20,7 @@ const FileExplorer = styled.aside`
 
   display: flex;
   flex-direction: column;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid ${({ theme }) => theme.border};
 `;
 
 const ActionHeader = styled.div`
@@ -32,12 +31,12 @@ const ActionHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid ${({ theme }) => theme.border};
 `;
 
 const TreeContainer = styled.div`
   flex: 1;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   padding-inline: var(--padding-inline);
 `;
@@ -52,13 +51,13 @@ const FileView = styled.main`
 const TabContainer = styled.div`
   width: 100%;
   height: var(--header-height);
-  overflow-x: scroll;
+  overflow-x: auto;
 
   display: flex;
   align-items: center;
   flex-direction: row;
 
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid ${({ theme }) => theme.border};
 
   ${StyledTab} {
     flex-shrink: 0;

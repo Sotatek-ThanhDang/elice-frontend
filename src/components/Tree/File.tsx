@@ -11,19 +11,21 @@ const TreeFile = (props: Props) => {
   return (
     <StyledFile onClick={props.onClick}>
       {getFileIconFromName(props.fileName)}
-      <p>{props.fileName}</p>
+      <StyledFileName title={props.fileName}>{props.fileName}</StyledFileName>
     </StyledFile>
   );
 };
 
-const StyledFile = styled.div`
+export const StyledFile = styled.div`
   display: flex;
   padding-left: calc(var(--svg-width) + var(--icon-gap));
   gap: var(--icon-gap);
+`;
 
-  &:hover {
-    background-color: lightblue;
-  }
+const StyledFileName = styled.p`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export default TreeFile;

@@ -27,14 +27,13 @@ const StyledTab = styled.div<{ isActive: boolean; isChange: boolean }>`
   align-items: center;
   gap: 1rem;
 
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid ${({ theme }) => theme.border};
   border-right-width: 0;
 
   ${({ isActive }) =>
     isActive &&
     `
     border-top: 2px solid blue;
-    background-color: honeydew;
     `}
 
   &:first-child {

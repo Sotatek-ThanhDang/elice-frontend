@@ -1,6 +1,7 @@
 import { Editor } from '@/components/Editor';
 import { useMutationFile } from '@/hooks/useMutationFile';
 import { useAppSelector } from '@/store';
+import { selectAppTheme } from '@/store/common/common.selector';
 import { selectActiveFile } from '@/store/fileEditor/fileEditor.selector';
 import { isImage, isVideo } from '@/utils/file';
 
@@ -9,6 +10,7 @@ import { StyledFileViewContainer } from '../index.styles';
 export default function FileViewContainer() {
   const file = useAppSelector(selectActiveFile);
   const { saveDraftFile, saveCurrentFile } = useMutationFile();
+  const theme = useAppSelector(selectAppTheme);
 
   const handlerSaveFile = (filePath: string) => {
     return (currVal: string) => {
@@ -46,6 +48,7 @@ export default function FileViewContainer() {
         }}
         onSave={handlerSaveFile(file?.path ?? '')}
         debounceMs={100}
+        theme={theme}
       />
     </StyledFileViewContainer>
   );

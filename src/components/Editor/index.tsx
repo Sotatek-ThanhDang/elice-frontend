@@ -9,6 +9,7 @@ type Props = {
   onChange: (value: string) => void;
   onSave: (value: string) => void;
   debounceMs?: number;
+  theme?: string;
 };
 
 export const Editor: React.FC<Props> = ({
@@ -17,6 +18,7 @@ export const Editor: React.FC<Props> = ({
   value,
   onChange,
   debounceMs = 500,
+  theme,
 }) => {
   const [editor, setEditor] = useState<monaco.editor.IStandaloneCodeEditor | null>(null);
   const _preventChangeEvent = useRef(false);
@@ -45,6 +47,12 @@ export const Editor: React.FC<Props> = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
+
+  useEffect(() => {
+    if (theme) {
+      monaco.editor.setTheme(theme);
+    }
+  }, [theme]);
 
   useEffect(() => {
     if (monacoEl) {

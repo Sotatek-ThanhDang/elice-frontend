@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
+import TreeFile, { StyledFile } from '@/components/Tree/File';
+import TreeFolder, { StyledFolder } from '@/components/Tree/Folder';
 import { FileTreeNode } from '@/types/file';
 import { getSortedTreeNode } from '@/utils/fileTree';
-
-import TreeFile from './File';
-import TreeFolder from './Folder';
 
 type FileClickEvent = (rawData: FileTreeNode, name: string, key: string) => void;
 
@@ -61,6 +60,11 @@ const TreeContainer = styled.div`
   svg {
     width: var(--svg-width);
     height: var(--svg-width);
+    flex-shrink: 0;
+  }
+
+  ${StyledFile}:hover,${StyledFolder}:hover {
+    background-color: ${({ theme }) => theme.backgroundFolderHover};
   }
 `;
 

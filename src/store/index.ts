@@ -9,6 +9,7 @@ import {
 } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
+import commonReducer from '@/store/common/common.slice';
 import fileEditorReducer from '@/store/fileEditor/fileEditor.slice';
 import filesReducer from '@/store/files/files.slice';
 
@@ -18,6 +19,7 @@ export const resetStore = createAction(RESET_STORE_ACTION_KEY);
 const combinedReducer = combineReducers({
   files: filesReducer,
   fileEditor: fileEditorReducer,
+  common: commonReducer,
 });
 
 const rootReducer: Reducer = (state: ReturnType<typeof combinedReducer>, action: UnknownAction) => {
