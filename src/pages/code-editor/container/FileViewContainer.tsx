@@ -39,7 +39,7 @@ export default function FileViewContainer() {
   return (
     <StyledFileViewContainer>
       <Editor
-        value={file?.value ?? ''}
+        value={file?.draftValue ?? ''}
         language={file?.lang ?? ''}
         onChange={(text: string) => {
           saveDraftFile(text);

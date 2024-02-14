@@ -34,6 +34,7 @@ const selectActiveFile = createSelector([selectFiles, selectCurrentFilePath], (f
 
   return {
     value: activeFile.data,
+    draftValue: activeFile.draftData,
     lang: activeFile.lang,
     path: activeFile.path,
     arrayBuffer: activeFile.arrayBuffer,

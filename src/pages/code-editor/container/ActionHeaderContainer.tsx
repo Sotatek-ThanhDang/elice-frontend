@@ -61,6 +61,7 @@ export default function ActionHeaderContainer() {
           type="file"
           onChange={(e) => onChangeFile(e)}
           style={{ display: 'none' }}
+          accept='.zip'
         />
       </div>
       <div>

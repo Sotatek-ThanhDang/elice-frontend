@@ -42,7 +42,7 @@ const createFileAndFolder = (
   folders.push(currentFile);
 };
 
-const getSortedTreeNode = (treeNode: FileTreeNode[]): FileTreeNode[Ç] => {
+const getSortedTreeNode = (treeNode: FileTreeNode[]): FileTreeNode[] => {
   const files: FileTreeNode[] = [];
   const folders: FileTreeNode[] = [];
 

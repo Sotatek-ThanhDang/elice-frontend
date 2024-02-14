@@ -1,6 +1,7 @@
+import { CiImageOn } from 'react-icons/ci';
 import { FaCss3, FaFileAlt, FaHtml5 } from 'react-icons/fa';
 import { IoLogoJavascript } from 'react-icons/io5';
-import { LuFileJson } from 'react-icons/lu';
+import { LuFileJson, LuFileVideo } from 'react-icons/lu';
 import { SiTypescript } from 'react-icons/si';
 
 const getFileNameWithoutExtension = (fileName: string) => {
@@ -40,7 +41,15 @@ const isImage = (fileName: string) => {
 };
 
 const getFileIconFromName = (fileName: string) => {
-  const fileExtentions = getFileExtentions(fileName);
+  const fileExtentions = getFileExtentions(fileName) ?? '';
+
+  if (isVideo(fileExtentions)) {
+    return <LuFileVideo />;
+  }
+
+  if (isImage(fileExtentions)) {
+    return <CiImageOn />;
+  }
 
   switch (fileExtentions) {
     case 'js':

@@ -30,6 +30,13 @@ const rootReducer: Reducer = (state: ReturnType<typeof combinedReducer>, action:
 
 export const store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['files/saveFiles', 'fileEditor/viewFile'],
+        ignoredPaths: ['files.files', 'fileEditor.files'],
+      },
+    }),
 });
 
 export type AppDispatch = typeof store.dispatch;

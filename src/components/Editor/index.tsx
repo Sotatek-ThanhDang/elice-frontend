@@ -24,7 +24,6 @@ export const Editor: React.FC<Props> = ({
 
   useEffect(() => {
     if (editor && language) {
-      console.warn(language);
       const model = editor.getModel()!;
       monaco.editor.setModelLanguage(model, language);
     }
@@ -52,7 +51,10 @@ export const Editor: React.FC<Props> = ({
       setEditor((editor) => {
         if (editor) return editor;
 
-        const editerInstance = monaco.editor.create(monacoEl.current!);
+        const editerInstance = monaco.editor.create(monacoEl.current!, {
+          language,
+          value,
+        });
 
         const handlerEditorChange = debounce(() => {
           onChange(editerInstance.getValue());
