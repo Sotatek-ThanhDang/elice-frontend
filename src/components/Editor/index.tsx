@@ -34,16 +34,20 @@ export const Editor: React.FC<Props> = ({
 
   useEffect(() => {
     if (editor) {
+      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
+        onSave(editor.getValue());
+      });
+    }
+  }, [editor, onSave]);
+
+  useEffect(() => {
+    if (editor) {
       if (value === editor.getValue()) {
         return;
       }
       _preventChangeEvent.current = true;
       editor.setValue(value);
       _preventChangeEvent.current = false;
-
-      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
-        onSave(editor.getValue());
-      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
@@ -87,3 +91,5 @@ const StyledEditer = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+export default Editor;
