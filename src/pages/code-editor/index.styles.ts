@@ -86,6 +86,13 @@ const StyledFileViewContainer = styled.div`
 
   width: 100%;
   flex: 1;
+
+  img,
+  video {
+    display: inline-block;
+    padding-inline: 5%;
+    max-width: 100%;
+  }
 `;
 
 export {

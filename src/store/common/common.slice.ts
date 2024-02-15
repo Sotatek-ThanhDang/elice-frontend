@@ -2,8 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { InitialState } from './common.type';
 
+const defaultTheme =
+  (localStorage.getItem('theme') as InitialState['theme'] | null) ??
+  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+localStorage.setItem('theme', defaultTheme);
+
 const initialState: InitialState = {
-  theme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+  theme: defaultTheme,
 };
 
 export const commonSlice = createSlice({
@@ -11,7 +16,9 @@ export const commonSlice = createSlice({
   initialState,
   reducers: {
     setTheme: (state) => {
-      state.theme = state.theme === 'dark' ? 'light' : 'dark';
+      const newTheme = state.theme === 'dark' ? 'light' : 'dark';
+      state.theme = newTheme;
+      localStorage.setItem('theme', newTheme);
     },
   },
 });

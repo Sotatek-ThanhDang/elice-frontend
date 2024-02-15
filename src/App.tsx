@@ -20,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    min-height: 100vh;
     background-color: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
     transition: all 0.3s;
@@ -32,12 +33,12 @@ function App() {
   const theme = useAppSelector(selectAppTheme);
 
   return (
-    <Suspense fallback={<h1>Loading....</h1>}>
-      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <Suspense fallback={<h1>Loading....</h1>}>
         <CodeEditer />
-        <GlobalStyle />
-      </ThemeProvider>
-    </Suspense>
+      </Suspense>
+      <GlobalStyle />
+    </ThemeProvider>
   );
 }
 
