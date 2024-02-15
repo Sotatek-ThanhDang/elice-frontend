@@ -13,7 +13,7 @@ import { selectActiveRawFile } from '@/store/fileEditor/fileEditor.selector';
 import { selectRawFilesState, selectRootFileName } from '@/store/files/files.selector';
 import { saveFiles } from '@/store/files/files.slice';
 import { FileData } from '@/types/file';
-import { getFileNameFromPath, isTextFile } from '@/utils/file';
+import { getFileNameFromPath } from '@/utils/file';
 
 import { ActionHeader } from '../index.styles';
 
@@ -30,11 +30,13 @@ export default function ActionHeaderContainer() {
     const zipFile = event.target.files?.[0];
     if (!zipFile) return;
 
-    extractZipToFile(zipFile).then((data: FileData[] | null) => {
-      if (data) {
+    extractZipToFile(zipFile)
+      .then((data: FileData[]) => {
         dispatch(saveFiles({ files: data, rootFoldername: zipFile.name }));
-      }
-    });
+      })
+      .catch(() => {
+        alert('Invalid extract zip to file');
+      });
   };
 
   const handlerDownloadFolder = async () => {
@@ -44,9 +46,7 @@ export default function ActionHeaderContainer() {
 
   const handlerDownloadFile = () => {
     downloadBlobFile(
-      new Blob([
-        isTextFile(currentFile!.arrayBuffer) ? currentFile!.data : currentFile!.arrayBuffer,
-      ]),
+      new Blob([currentFile!.isBinary ? currentFile!.arrayBuffer : currentFile!.data]),
       getFileNameFromPath(currentFile!.path) ?? ''
     );
   };

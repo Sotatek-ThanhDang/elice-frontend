@@ -1,9 +1,9 @@
 type FileData = {
   name: string;
   isFolder: boolean;
-  rawData: string;
   dataText: string;
   arrayBuffer: ArrayBuffer;
+  isBinary: boolean;
 };
 
 type FileTreeNode = {

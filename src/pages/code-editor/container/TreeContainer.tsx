@@ -1,7 +1,11 @@
 import Tree from '@/components/Tree';
 import { useMutationFile } from '@/hooks/useMutationFile';
-import { RootState, store, useAppSelector } from '@/store';
-import { selectFilesTree, selectRootFileName } from '@/store/files/files.selector';
+import { useAppSelector } from '@/store';
+import {
+  selectFilesTree,
+  selectRawFilesState,
+  selectRootFileName,
+} from '@/store/files/files.selector';
 import { FileTreeNode } from '@/types/file';
 import { getFileNameWithoutExtension } from '@/utils/file';
 
@@ -20,12 +24,17 @@ const TreeHeader = () => {
 const TreeBody = () => {
   const { viewFileFromTree } = useMutationFile();
   const filesTree = useAppSelector(selectFilesTree);
+  const rawFiles = useAppSelector(selectRawFilesState);
 
   const handlerClickFile = (rawData: FileTreeNode) => {
-    const rootState: RootState = store.getState();
-    const currentFile = rootState.files.files.find((item) => item.name === rawData.path);
+    const currentFile = rawFiles.find((item) => item.name === rawData.path);
 
-    viewFileFromTree(rawData.path, rawData.value, currentFile?.arrayBuffer || new ArrayBuffer(0));
+    viewFileFromTree(
+      rawData.path,
+      rawData.value,
+      currentFile?.arrayBuffer || new ArrayBuffer(0),
+      currentFile?.isBinary ?? false
+    );
   };
 
   return <Tree data={filesTree} onFileClick={handlerClickFile} />;

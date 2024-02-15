@@ -28,10 +28,11 @@ export const fileEditorSlice = createSlice({
 
       const fileData = {
         path: payload.path,
-        data: payload.data,
-        draftData: payload.data!,
+        data: payload.dataText,
+        draftData: payload.dataText,
         lang: getFileLangFromName(payload.path),
         arrayBuffer: payload.arrayBuffer,
+        isBinary: payload.isBinary,
       };
 
       if (!state.files[payload.path]) {

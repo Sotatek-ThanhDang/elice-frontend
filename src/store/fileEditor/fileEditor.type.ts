@@ -1,10 +1,11 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 
-type FileDetail = {
+import { FileData } from '@/types/file';
+
+type FileDetail = Pick<FileData, 'arrayBuffer' | 'isBinary'> & {
   path: string;
   data: string;
   draftData: string;
-  arrayBuffer: ArrayBuffer;
   lang: string;
 };
 
@@ -15,11 +16,9 @@ type InitialState = {
   currentFile: string;
 };
 
-type ViewFileFromTree = {
+type ViewFileFromTree = Pick<FileData, 'arrayBuffer' | 'isBinary' | 'dataText'> & {
   type: 'tree';
   path: string;
-  data: string;
-  arrayBuffer: ArrayBuffer;
 };
 
 type ViewFileFromTab = Pick<ViewFileFromTree, 'path'> & {

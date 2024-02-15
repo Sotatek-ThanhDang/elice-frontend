@@ -1,54 +1,34 @@
 import JSZip from 'jszip';
 
 import { FileData } from '@/types/file';
-import { isTextFile } from '@/utils/file';
 
 export const useZipFile = () => {
-  const getFiles = async (zipData: JSZip): Promise<FileData[]> => {
-    let files: FileData[] = [];
-
-    try {
-      const fileDataPromise = Object.keys(zipData.files).map(async (fileName) => {
-        const file = zipData.files[fileName];
-
-        const dataText = await file.async('string');
-        const arrayBuffer = await file.async('arraybuffer');
-
-        return {
-          dataText,
-          arrayBuffer,
-          name: file.name,
-          isFolder: file.dir,
-          rawData: JSON.stringify(file),
-        };
+  const extractZipToFile = (files: File): Promise<FileData[]> => {
+    return new Promise((resolve, reject) => {
+      const readFileWorker = new Worker(new URL('../workers/readFileWorker.ts', import.meta.url), {
+        type: 'module',
       });
 
-      files = await Promise.all(fileDataPromise);
-    } catch (error) {
-      console.warn('Read file error');
-    }
+      readFileWorker.postMessage({ files });
 
-    files.sort((a, b) => a.name.localeCompare(b.name));
+      readFileWorker.onmessage = (event: MessageEvent<[FileData[], unknown]>) => {
+        const [extractedFiles, error] = event.data;
 
-    return files;
-  };
+        if (error) {
+          reject(error);
+        }
+        resolve(extractedFiles);
 
-  const extractZipToFile = (files: File): Promise<FileData[] | null> => {
-    const zip = new JSZip();
-    return zip.loadAsync(files).then(
-      (zipData) => getFiles(zipData),
-      () => {
-        alert('Not a valid zip file');
-        return null;
-      }
-    );
+        readFileWorker.terminate();
+      };
+    });
   };
 
   const convertFilesToZip = async (files: FileData[]) => {
     const zip = new JSZip();
 
     files.forEach((item) => {
-      zip.file(item.name, isTextFile(item.arrayBuffer) ? item.dataText : item.arrayBuffer);
+      zip.file(item.name, item.isBinary ? item.arrayBuffer : item.dataText);
     });
 
     const data = await zip.generateAsync({ type: 'blob' });

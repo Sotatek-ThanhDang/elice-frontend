@@ -10,13 +10,19 @@ import { updateFileTree } from '@/store/files/files.slice';
 export const useMutationFile = () => {
   const dispatch = useAppDispatch();
 
-  const viewFileFromTree = (path: string, value: string, arrayBuffer: ArrayBuffer) => {
+  const viewFileFromTree = (
+    path: string,
+    value: string,
+    arrayBuffer: ArrayBuffer,
+    isBinary: boolean
+  ) => {
     dispatch(
       viewFile({
         type: 'tree',
         path,
-        data: value,
+        dataText: value,
         arrayBuffer,
+        isBinary: isBinary,
       })
     );
   };
@@ -45,7 +51,7 @@ export const useMutationFile = () => {
     a.style.display = 'none';
     a.href = url;
     a.download = fileName;
-    
+
     a.click();
     window.URL.revokeObjectURL(url);
   };
