@@ -44,8 +44,12 @@ const getFiles = async (zipData: JSZip): Promise<[FileData[], unknown]> => {
 self.onmessage = async (event) => {
   const { files } = event.data;
   const zip = new JSZip();
-  const rawZipData = await zip.loadAsync(files);
-  const extractedFiles = await getFiles(rawZipData);
+  try {
+    const rawZipData = await zip.loadAsync(files);
+    const extractedFiles = await getFiles(rawZipData);
 
-  self.postMessage(extractedFiles);
+    self.postMessage(extractedFiles);
+  } catch (error) {
+    self.postMessage([[], error]);
+  }
 };

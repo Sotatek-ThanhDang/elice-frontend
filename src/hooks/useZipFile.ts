@@ -13,7 +13,7 @@ export const useZipFile = () => {
 
       readFileWorker.onmessage = (event: MessageEvent<[FileData[], unknown]>) => {
         const [extractedFiles, error] = event.data;
-
+        
         if (error) {
           reject(error);
         }

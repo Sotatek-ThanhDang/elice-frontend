@@ -66,6 +66,10 @@ const TreeContainer = styled.div`
   ${StyledFile}:hover,${StyledFolder}:hover {
     background-color: ${({ theme }) => theme.backgroundFolderHover};
   }
+
+  ${StyledFile},${StyledFolder} {
+    cursor: pointer;
+  }
 `;
 
 export default Tree;

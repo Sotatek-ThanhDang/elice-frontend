@@ -30,6 +30,8 @@ const StyledTab = styled.div<{ isActive: boolean; isChange: boolean }>`
   border: 1px solid ${({ theme }) => theme.border};
   border-right-width: 0;
 
+  cursor: pointer;
+
   ${({ isActive }) =>
     isActive &&
     `

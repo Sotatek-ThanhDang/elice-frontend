@@ -32,6 +32,10 @@ const ActionHeader = styled.div`
   align-items: center;
   justify-content: space-around;
   border-bottom: 1px solid ${({ theme }) => theme.border};
+
+  svg {
+    cursor: pointer;
+  }
 `;
 
 const TreeContainer = styled.div`
