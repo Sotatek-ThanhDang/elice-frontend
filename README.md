@@ -89,7 +89,7 @@ const getFiles = async (zipData: JSZip): Promise<[FileData[], unknown]> => {
     error = err;
   }
 
-  <strong>// After retrieving the files and their data, we sort all file data by name in ascending order to ensure the correct sequence.</strong>
+  // After retrieving the files and their data, we sort all file data by name in ascending order to ensure the correct sequence.
   files.sort((a, b) => a.name.localeCompare(b.name));
 
   return [files, error];
