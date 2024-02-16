@@ -90,12 +90,14 @@ const StyledFileViewContainer = styled.div`
 
   width: 100%;
   flex: 1;
+  height: calc(100% - var(--header-height));
 
   img,
   video {
     display: inline-block;
     padding-inline: 5%;
     max-width: 100%;
+    max-height: 100%;
   }
 `;
 
